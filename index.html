@@ -192,7 +192,7 @@
                     const isCommute = catClean === 'commute';
                     
                     const isLocationLink = location && (location.includes('http') || location.includes('goo.gl'));
-                    const locDisplay = isLocationLink ? "📍 View Map" : `📍 ${location}`;
+                    const locDisplay = isLocationLink ? "View Map" : ` ${location}`;
                     const locLink = isLocationLink ? location : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 
                     list.innerHTML += `
