@@ -3,71 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bali Itinerary 🌴</title>
+    <title>Bali 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #f9fafb; color: #111827; font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-modern { font-family: 'Outfit', sans-serif; }
-        .glass-card { background: #ffffff; border-radius: 16px; border: 1px solid #f3f4f6; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .day-header { position: sticky; top: 0; z-index: 10; background: rgba(249, 250, 251, 0.9); backdrop-filter: blur(10px); padding: 16px 0; font-weight: 700; border-bottom: 1px solid #e5e7eb; margin-bottom: 20px; }
+        body { background-color: #fcfcfc; color: #1a1a1a; font-family: 'Inter', sans-serif; letter-spacing: -0.01em; }
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; }
+        .glass-card { background: #ffffff; border-radius: 12px; border: 1px solid #f0f0f0; }
+        .day-header { position: sticky; top: 0; z-index: 10; background: rgba(252, 252, 252, 0.9); backdrop-filter: blur(8px); padding: 12px 0; border-bottom: 1px solid #f0f0f0; margin-top: 24px; }
         
-        /* Category Colors */
+        /* Condensed Category Tags */
+        .tag { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
         .cat-meals { background: #fee2e2; color: #991b1b; }
         .cat-activity { background: #dcfce7; color: #166534; }
         .cat-freetime { background: #f3e8ff; color: #6b21a8; }
         .cat-commute { background: #fef9c3; color: #854d0e; }
-        .cat-default { background: #f3f4f6; color: #374151; }
+        .cat-none { background: #f3f4f6; color: #6b7280; }
     </style>
 </head>
-<body class="p-6 pb-32">
+<body class="p-5 pb-24">
 
-    <header class="mb-8">
-        <h1 class="text-4xl font-bold tracking-tight">Bali Trip</h1>
-        <p class="text-xs font-bold opacity-30 uppercase tracking-widest mt-1">Shared Live Planner</p>
+    <header class="mb-6">
+        <h1 class="text-3xl font-bold tracking-tight">Bali Trip</h1>
+        <p class="text-[10px] font-bold opacity-30 uppercase tracking-widest">Shared Itinerary</p>
     </header>
 
-    <section class="mb-10">
-        <h2 class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-40">Flight Details</h2>
-        <div class="glass-card p-5 space-y-3 text-sm">
+    <section class="mb-4">
+        <div class="glass-card p-4 space-y-3">
             <div class="flex justify-between items-center">
-                <span class="font-bold text-blue-600">HKG → DPS (CX785)</span>
-                <span class="font-bold">10:00 AM</span>
+                <div>
+                    <p class="text-[10px] font-bold text-blue-500 uppercase">Departure • CX785</p>
+                    <p class="text-sm font-semibold">HKG → DPS</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs font-bold text-gray-400">10:00 AM – 03:00 PM</p>
+                </div>
             </div>
             <div class="border-t border-gray-50 pt-3 flex justify-between items-center">
-                <span class="font-bold text-blue-600">DPS → HKG (CX784)</span>
-                <span class="font-bold">04:10 PM</span>
+                <div>
+                    <p class="text-[10px] font-bold text-blue-500 uppercase">Return • CX784</p>
+                    <p class="text-sm font-semibold">DPS → HKG</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs font-bold text-gray-400">04:10 PM – 09:00 PM</p>
+                </div>
             </div>
         </div>
     </section>
 
     <div id="itinerary-container">
-        <p class="text-center py-20 opacity-30 text-sm">Loading your adventure...</p>
+        <div class="animate-pulse space-y-4 mt-10">
+            <div class="h-4 bg-gray-100 rounded w-1/4"></div>
+            <div class="h-20 bg-gray-50 rounded"></div>
+        </div>
     </div>
 
-    <button onclick="loadData()" class="fixed bottom-8 right-8 bg-black text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-transform active:scale-90">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
+    <button onclick="loadData()" class="fixed bottom-6 right-6 bg-black text-white p-4 rounded-full shadow-xl active:scale-90 transition-transform">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8m0-5v5h-5"/></svg>
     </button>
 
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYlNFGx7MhT_2BH7GnJK4ZJGnrH1ir6vjsOg3OfeS23zR9A_olRX0jySoCiUw1lPVVMg/exec';
 
         const tripDays = [
-            { date: '2026-04-28', label: 'Tuesday, 28 Apr' },
-            { date: '2026-04-29', label: 'Wednesday, 29 Apr' },
-            { date: '2026-04-30', label: 'Thursday, 30 Apr' },
-            { date: '2026-05-01', label: 'Friday, 01 May' },
-            { date: '2026-05-02', label: 'Saturday, 02 May' }
+            { date: '2026-04-28', label: 'Tue, 28 Apr' },
+            { date: '2026-04-29', label: 'Wed, 29 Apr' },
+            { date: '2026-04-30', label: 'Thu, 30 Apr' },
+            { date: '2026-05-01', label: 'Fri, 1 May' },
+            { date: '2026-05-02', label: 'Sat, 2 May' }
         ];
 
         async function loadData() {
             try {
                 const response = await fetch(SCRIPT_URL);
                 const data = await response.json();
-                // Assumes row 0 is header, so we take slice(1)
                 render(data.slice(1));
             } catch (err) {
-                document.getElementById('itinerary-container').innerHTML = "Error loading data. Check if the Script is deployed correctly.";
+                console.error(err);
+                document.getElementById('itinerary-container').innerHTML = "<p class='text-xs opacity-40 text-center mt-10'>Error syncing data...</p>";
             }
         }
 
@@ -77,53 +90,49 @@
 
             tripDays.forEach(day => {
                 const daySection = document.createElement('div');
-                daySection.className = 'mb-10';
-                daySection.innerHTML = `<div class="day-header text-xl">${day.label}</div>`;
+                daySection.innerHTML = `<div class="day-header"><h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest">${day.label}</h3></div>`;
                 
-                // Helper to normalize dates for comparison
+                // FIXED: Better date matching to prevent "off by one day" errors
                 const dayPlans = rows.filter(r => {
-                    const rowDate = r[0].toString().includes('T') ? r[0].split('T')[0] : r[0];
-                    return rowDate.includes(day.date);
+                    const rowDateRaw = r[0].toString();
+                    return rowDateRaw.startsWith(day.date);
                 });
-                
-                if (dayPlans.length === 0) {
-                    daySection.innerHTML += `<p class="text-xs opacity-20 italic ml-2">No plans recorded...</p>`;
-                }
+
+                const list = document.createElement('div');
+                list.className = 'mt-2 space-y-2';
 
                 dayPlans.forEach(plan => {
                     const [date, start, end, activity, category, place, note] = plan;
-                    const catClean = (category || 'default').toLowerCase().replace(/\s/g, '');
-                    const catClass = `cat-${catClean}`;
                     
-                    daySection.innerHTML += `
-                        <div class="glass-card p-5 mb-4">
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="px-2 py-1 rounded text-[9px] font-bold uppercase tracking-wider ${catClass}">
-                                    ${category || 'Activity'}
-                                </span>
-                                <span class="text-xs font-bold text-gray-400">
-                                    ${start}${end ? ` — ${end}` : ''}
-                                </span>
-                            </div>
-                            
-                            <h3 class="text-lg font-semibold text-gray-900 leading-tight">${activity}</h3>
-                            
-                            ${place && place !== 'TBC' && place !== '' ? `
-                                <div class="flex items-center gap-1 mt-2 text-xs font-medium text-blue-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                    ${place}
-                                </div>
-                            ` : ''}
+                    // Cleanup category for CSS class
+                    const catKey = (category || 'none').toLowerCase().replace(/\s/g, '');
+                    const hasPlace = place && place !== 'TBC' && place !== '';
 
-                            ${note ? `<p class="text-xs text-gray-400 mt-3 italic leading-relaxed border-t border-gray-50 pt-3">${note}</p>` : ''}
+                    list.innerHTML += `
+                        <div class="glass-card p-3 flex gap-4 items-start">
+                            <div class="w-16 flex-shrink-0 pt-0.5">
+                                <div class="text-[10px] font-bold text-gray-900">${start || ''}</div>
+                                <div class="text-[9px] font-medium text-gray-300 uppercase">${end || ''}</div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="tag cat-${catKey}">${category || 'Trip'}</span>
+                                </div>
+                                <h4 class="text-sm font-semibold text-gray-900 truncate">${activity}</h4>
+                                ${hasPlace ? `<p class="text-[10px] text-blue-500 font-medium mt-0.5">📍 ${place}</p>` : ''}
+                                ${note ? `<p class="text-[10px] text-gray-400 mt-1 italic border-l-2 border-gray-100 pl-2">${note}</p>` : ''}
+                            </div>
                         </div>
                     `;
                 });
-                container.appendChild(daySection);
+
+                if (dayPlans.length > 0) {
+                    daySection.appendChild(list);
+                    container.appendChild(daySection);
+                }
             });
         }
 
-        // Initial Load
         loadData();
     </script>
 </body>
