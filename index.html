@@ -10,7 +10,6 @@
         body { background-color: #f8fafc; color: #1e293b; font-family: 'Inter', sans-serif; letter-spacing: -0.01em; }
         h1, h3, h4 { font-family: 'Outfit', sans-serif; }
         
-        /* Compact Card Styling */
         .glass-card { 
             background: white; 
             border-radius: 16px; 
@@ -22,75 +21,79 @@
 
         .day-header { 
             position: sticky; top: 0; z-index: 50; 
-            background: rgba(248, 250, 252, 0.9); 
+            background: rgba(248, 250, 252, 0.95); 
             backdrop-filter: blur(8px); 
             padding: 10px 0;
             margin-bottom: 8px;
             border-bottom: 1px solid #e2e8f0;
         }
 
-        /* Vibrant Flight Ticket */
+        /* DARKER VIBRANT FLIGHT TICKET */
         .flight-ticket {
-            background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
             border-radius: 20px;
             padding: 20px;
             color: white;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-        }
-        .flight-ticket::after {
-            content: '✈';
-            position: absolute;
-            right: -10px;
-            bottom: -20px;
-            font-size: 120px;
-            opacity: 0.1;
-            transform: rotate(-15deg);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
         }
 
-        /* More Vibrant Pill Tags */
+        /* VIBRANT PILL TAGS */
         .tag { font-size: 9px; font-weight: 800; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; display: inline-block; }
         .cat-meals { background: #fee2e2; color: #ef4444; }
         .cat-activity { background: #dcfce7; color: #16a34a; }
         .cat-freetime { background: #e0e7ff; color: #4f46e5; }
         .cat-commute { background: #fef9c3; color: #ca8a04; }
         .cat-default { background: #f1f5f9; color: #64748b; }
+
+        /* NEW LOCATION TAG COLOR (Indigo/Slate instead of Light Blue) */
+        .loc-tag { color: #6366f1; font-weight: 700; font-size: 10px; }
     </style>
 </head>
 <body class="p-4 pb-24">
 
     <header class="mb-4">
         <h1 class="text-3xl font-900 tracking-tighter text-slate-900">Bali 2026</h1>
-        <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">April 28 — May 02</p>
+        <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Confirmed Itinerary</p>
     </header>
 
     <div class="flight-ticket mb-6">
         <div class="flex justify-between items-center text-[10px] font-bold uppercase opacity-80 mb-4 tracking-tighter">
-            <span>Cathay Pacific Airways</span>
-            <span class="bg-white/20 px-2 py-1 rounded">Confirmed</span>
+            <span>Cathay Pacific</span>
+            <span class="bg-white/10 px-2 py-1 rounded">Direct Flight</span>
         </div>
-        <div class="space-y-5">
+        <div class="space-y-6">
             <div class="flex justify-between items-center">
-                <div class="text-xl font-black">HKG<span class="block text-[10px] font-medium opacity-70 italic">10:00 AM</span></div>
-                <div class="flex-1 border-t-2 border-dashed border-white/30 mx-4 relative">
+                <div class="text-xl font-black">HKG
+                    <span class="block text-[10px] font-medium opacity-70 italic">10:00 AM</span>
+                    <span class="block text-[9px] font-bold text-blue-300 mt-1 uppercase">CX 785</span>
+                </div>
+                <div class="flex-1 border-t-2 border-dashed border-white/20 mx-4 relative">
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-lg">✈️</span>
                 </div>
-                <div class="text-xl font-black text-right">DPS<span class="block text-[10px] font-medium opacity-70 italic">03:00 PM</span></div>
-            </div>
-            <div class="flex justify-between items-center pt-4 border-t border-white/20">
-                <div class="text-xl font-black text-orange-300">DPS<span class="block text-[10px] font-medium opacity-70 italic text-white">04:10 PM</span></div>
-                <div class="flex-1 border-t-2 border-dashed border-white/30 mx-4 relative">
-                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-lg text-orange-300">🛫</span>
+                <div class="text-xl font-black text-right">DPS
+                    <span class="block text-[10px] font-medium opacity-70 italic">03:00 PM</span>
                 </div>
-                <div class="text-xl font-black text-right text-orange-300">HKG<span class="block text-[10px] font-medium opacity-70 italic text-white">09:00 PM</span></div>
+            </div>
+            <div class="flex justify-between items-center pt-5 border-t border-white/10">
+                <div class="text-xl font-black text-orange-400">DPS
+                    <span class="block text-[10px] font-medium opacity-70 italic text-white">04:10 PM</span>
+                    <span class="block text-[9px] font-bold text-orange-200 mt-1 uppercase text-right">CX 784</span>
+                </div>
+                <div class="flex-1 border-t-2 border-dashed border-white/20 mx-4 relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-lg text-orange-400">🛫</span>
+                </div>
+                <div class="text-xl font-black text-right text-orange-400">HKG
+                    <span class="block text-[10px] font-medium opacity-70 italic text-white">09:00 PM</span>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="itinerary-container"></div>
 
-    <button onclick="loadData()" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-xl active:scale-90 transition-all">
+    <button onclick="loadData()" class="fixed bottom-6 right-6 bg-indigo-600 text-white p-4 rounded-full shadow-xl active:scale-90 transition-all">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8m0-5v5h-5"/></svg>
     </button>
 
@@ -98,11 +101,11 @@
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYlNFGx7MhT_2BH7GnJK4ZJGnrH1ir6vjsOg3OfeS23zR9A_olRX0jySoCiUw1lPVVMg/exec';
 
         const tripDays = [
-            { id: '28', label: 'Tuesday, 28 Apr' },
-            { id: '29', label: 'Wednesday, 29 Apr' },
-            { id: '30', label: 'Thursday, 30 Apr' },
-            { id: '01', label: 'Friday, 1 May' },
-            { id: '02', label: 'Saturday, 2 May' }
+            { day: 28, label: 'Tuesday, 28 Apr' },
+            { day: 29, label: 'Wednesday, 29 Apr' },
+            { day: 30, label: 'Thursday, 30 Apr' },
+            { day: 1, label: 'Friday, 1 May' },
+            { day: 2, label: 'Saturday, 2 May' }
         ];
 
         function formatTimeExcel(val) {
@@ -127,13 +130,14 @@
             const container = document.getElementById('itinerary-container');
             container.innerHTML = '';
 
-            tripDays.forEach(day => {
+            tripDays.forEach(dayInfo => {
                 const daySection = document.createElement('div');
-                daySection.innerHTML = `<div class="day-header"><h3 class="text-[11px] font-900 text-slate-400 uppercase tracking-widest">${day.label}</h3></div>`;
+                daySection.innerHTML = `<div class="day-header"><h3 class="text-[11px] font-900 text-slate-400 uppercase tracking-widest">${dayInfo.label}</h3></div>`;
                 
+                // STRICT DATE MATCHING: Ensures 28th only shows 28th activities
                 const dayPlans = rows.filter(r => {
-                    const rowStr = r[0].toString();
-                    return rowStr.includes(`-${day.id}`) || rowStr.startsWith(day.id) || (day.id == '01' && rowStr.includes('-05-01'));
+                    const rowDate = new Date(r[0]);
+                    return rowDate.getDate() === dayInfo.day;
                 });
 
                 const list = document.createElement('div');
@@ -157,7 +161,7 @@
 
                             <div class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
                                 ${!isCommute && location && location.toLowerCase() !== 'place' ? 
-                                    `<span class="text-[10px] text-blue-500 font-bold">📍 ${location}</span>` : ''}
+                                    `<span class="loc-tag">📍 ${location}</span>` : ''}
                                 ${!isCommute && (!location || location.toLowerCase() === 'place') ? 
                                     `<span class="text-[10px] text-red-500 font-bold italic">⚠️ TBC</span>` : ''}
                                 ${notes && notes.toLowerCase() !== 'notes' ? 
