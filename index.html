@@ -38,7 +38,6 @@
             box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
         }
 
-        /* VIVID PILL TAGS */
         .tag { font-size: 8px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; }
         .cat-meals { background: #fee2e2; color: #ef4444; }
         .cat-activity { background: #dcfce7; color: #16a34a; }
@@ -147,22 +146,25 @@
                     
                     list.innerHTML += `
                         <div class="glass-card">
-                            <div class="flex justify-between items-start mb-2">
+                            <div class="flex justify-between items-start mb-1">
                                 <h4 class="text-[15px] font-bold text-slate-900 leading-tight pr-4">${activity}</h4>
                                 
-                                <div class="text-right flex flex-col items-end gap-1 shrink-0">
+                                <div class="text-right shrink-0">
                                     <span class="text-[10px] font-bold text-slate-300">
                                         ${formatTimeExcel(start)}${end ? `<br>— ${formatTimeExcel(end)}` : ''}
                                     </span>
-                                    <span class="tag cat-${catClean}">${catRaw}</span>
                                 </div>
                             </div>
 
-                            <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="tag cat-${catClean}">${catRaw}</span>
+                                
                                 ${!isCommute && location && location.toLowerCase() !== 'place' ? 
                                     `<span class="loc-tag">📍 ${location}</span>` : ''}
+                                
                                 ${!isCommute && (!location || location.toLowerCase() === 'place') ? 
                                     `<span class="text-[10px] text-red-500 font-bold italic">⚠️ TBC</span>` : ''}
+                                
                                 ${notes && notes.toLowerCase() !== 'notes' ? 
                                     `<span class="text-[10px] text-slate-400 italic">“${notes}”</span>` : ''}
                             </div>
