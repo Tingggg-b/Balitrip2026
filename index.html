@@ -177,7 +177,7 @@
             let s = val.toString();
             if (s.includes('T')) {
                 let d = new Date(val);
-                return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
+                return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }).toLowerCase();
             }
             return s.replace(/:\d{2}\s/, ' ').toLowerCase(); 
         }
