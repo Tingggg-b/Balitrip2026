@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bali 2026</title>
+    
+    <link rel="apple-touch-icon" href="https://media.istockphoto.com/id/1212688337/vector/pool-sunset.jpg?s=612x612&w=0&k=20&c=HCRWgXPkrVDpciWJRFDqLkGBGZklPJMZzr0cOX_3BrA=">
+    <meta name="apple-mobile-web-app-title" content="Bali 2026">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
     <style>
@@ -17,7 +23,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             margin-bottom: 10px;
             padding: 12px 14px;
-            border-left-width: 5px; /* Side border logic */
+            border-left-width: 5px;
         }
 
         .day-header { 
@@ -39,10 +45,8 @@
             box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
         }
 
-        /* LEGEND & CATEGORY STYLES */
         .tag { font-size: 8px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; display: inline-block; }
         
-        /* Category Specific Colors */
         .cat-meals { border-left-color: #ef4444; background-color: #fef2f2; }
         .tag-meals { background: #fee2e2; color: #ef4444; }
 
@@ -58,9 +62,7 @@
         .cat-default { border-left-color: #64748b; background-color: #f8fafc; }
         .tag-default { background: #f1f5f9; color: #64748b; }
 
-        /* DARK BLUE LOCATION */
         .loc-tag { color: #1e3a8a; font-weight: 800; font-size: 10px; text-decoration: none; }
-        .loc-tag:active { opacity: 0.6; }
     </style>
 </head>
 <body class="p-4 pb-24">
@@ -117,7 +119,7 @@
         <div class="glass-card cat-freetime">
             <div class="flex justify-between items-center mb-4">
                 <h4 class="text-[18px] font-black text-slate-900">MAE Villas</h4>
-                <a href="https://goo.gl/maps/ht8VHvJdntzSko6H8" target="_blank" class="loc-tag">📍 View Map</a>
+                <a href="https://goo.gl/maps/ht8VHvJdntzSko6H8" target="_blank" class="loc-tag"> View Map</a>
             </div>
             <div class="space-y-4">
                 <div class="flex gap-2">
@@ -192,8 +194,8 @@
                     const isCommute = catClean === 'commute';
                     
                     const isLocationLink = location && (location.includes('http') || location.includes('goo.gl'));
-                    const locDisplay = isLocationLink ? "View Map" : ` ${location}`;
-                    const locLink = isLocationLink ? location : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+                    const locDisplay = isLocationLink ? "📍 View Map" : `📍 ${location}`;
+                    const locLink = isLocationLink ? location : `http://google.com/maps/search/${encodeURIComponent(location)}`;
 
                     list.innerHTML += `
                         <div class="glass-card cat-${catClean}">
