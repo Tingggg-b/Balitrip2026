@@ -16,7 +16,7 @@
             border: 1px solid #e2e8f0; 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             margin-bottom: 10px;
-            padding: 12px 14px; /* Slightly tighter padding to save width */
+            padding: 12px 14px;
         }
 
         .day-header { 
@@ -45,7 +45,8 @@
         .cat-commute { background: #fef9c3; color: #ca8a04; }
         .cat-default { background: #f1f5f9; color: #64748b; }
 
-        .loc-tag { color: #6366f1; font-weight: 700; font-size: 10px; }
+        .loc-tag { color: #6366f1; font-weight: 700; font-size: 10px; text-decoration: none; }
+        .loc-tag:active { opacity: 0.6; }
     </style>
 </head>
 <body class="p-4 pb-24">
@@ -89,6 +90,46 @@
     </div>
 
     <div id="itinerary-container"></div>
+
+    <div class="mt-12 mb-8">
+        <div class="day-header"><h3 class="text-[11px] font-900 text-slate-400 uppercase tracking-widest">Hotel & Logistics</h3></div>
+        <div class="glass-card border-l-4 border-l-indigo-500">
+            <div class="flex justify-between items-center mb-4">
+                <h4 class="text-[18px] font-black text-slate-900">MAE Villas</h4>
+                <a href="https://goo.gl/maps/ht8VHvJdntzSko6H8" target="_blank" class="loc-tag">📍 View Map</a>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="flex gap-2">
+                    <div class="flex-1 bg-indigo-50 p-3 rounded-xl text-center">
+                        <p class="text-[9px] font-800 text-indigo-400 uppercase">Check-in</p>
+                        <p class="text-[14px] font-black text-indigo-900">3:00 PM</p>
+                    </div>
+                    <div class="flex-1 bg-slate-50 p-3 rounded-xl text-center">
+                        <p class="text-[9px] font-800 text-slate-400 uppercase">Check-out</p>
+                        <p class="text-[14px] font-black text-slate-900">11:00 AM</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <p class="text-[12px] text-slate-600 leading-snug">
+                        Contact <strong>Desak</strong> on WhatsApp to arrange your check-in:
+                    </p>
+                    <a href="https://wa.me/6282340666137" target="_blank" class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white font-bold py-3 rounded-xl shadow-md active:scale-95 transition-all">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412.001 12.048a11.827 11.827 0 001.578 5.925L0 24l6.135-1.61a11.817 11.817 0 005.911 1.566h.005c6.637 0 12.05-5.414 12.053-12.051a11.83 11.83 0 00-3.535-8.503z"/></svg>
+                        WhatsApp Desak
+                    </a>
+                </div>
+
+                <div class="pt-2 border-t border-slate-100">
+                    <p class="text-[10px] text-slate-400 uppercase font-800 mb-1">Transfer Tip</p>
+                    <p class="text-[11px] text-slate-500 italic">
+                        We advise booking airport transfers via: <a href="https://www.airporttransferbali.com" target="_blank" class="text-blue-500 underline font-bold">airporttransferbali.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <button onclick="loadData()" class="fixed bottom-6 right-6 bg-indigo-600 text-white p-4 rounded-full shadow-xl active:scale-90 transition-all">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8m0-5v5h-5"/></svg>
@@ -144,11 +185,15 @@
                     const catClean = catRaw.toLowerCase().replace(/\s/g, '');
                     const isCommute = catClean === 'commute';
                     
+                    // NAVIGATION LOGIC
+                    const isLocationLink = location && (location.includes('http') || location.includes('goo.gl'));
+                    const locDisplay = isLocationLink ? "📍 View Map" : `📍 ${location}`;
+                    const locLink = isLocationLink ? location : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+
                     list.innerHTML += `
                         <div class="glass-card">
                             <div class="flex justify-between items-start mb-1">
                                 <h4 class="text-[15px] font-bold text-slate-900 leading-tight w-[60%]">${activity}</h4>
-                                
                                 <div class="text-right shrink-0">
                                     <span class="text-[10px] font-bold text-slate-300 whitespace-nowrap">
                                         ${formatTimeExcel(start)}${end ? ` — ${formatTimeExcel(end)}` : ''}
@@ -160,7 +205,7 @@
                                 <span class="tag cat-${catClean}">${catRaw}</span>
                                 
                                 ${!isCommute && location && location.toLowerCase() !== 'place' ? 
-                                    `<span class="loc-tag">📍 ${location}</span>` : ''}
+                                    `<a href="${locLink}" target="_blank" class="loc-tag">${locDisplay}</a>` : ''}
                                 
                                 ${!isCommute && (!location || location.toLowerCase() === 'place') ? 
                                     `<span class="text-[10px] text-red-500 font-bold italic">⚠️ TBC</span>` : ''}
