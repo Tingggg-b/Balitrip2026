@@ -3,62 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bali 2026</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>Bali Itinerary 🌴</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@300;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; color: #1a1a1a; font-family: 'Inter', sans-serif; }
+        body { background-color: #f9fafb; color: #111827; font-family: 'Inter', sans-serif; }
         h1, h2, h3, .font-modern { font-family: 'Outfit', sans-serif; }
-        .glass-card { background: #ffffff; border-radius: 16px; border: 1px solid #eaeaea; }
-        .day-header { position: sticky; top: 0; z-index: 10; background: rgba(248, 249, 250, 0.9); backdrop-filter: blur(12px); padding: 16px 0; border-bottom: 1px solid #eeeeee; margin-bottom: 20px; }
-        .cat-meal { background: #f1f5f9; color: #475569; }
-        .cat-activity { background: #f0fdf4; color: #166534; }
-        .cat-hotel { background: #eff6ff; color: #1e40af; }
-        .cat-commute { background: #fffbeb; color: #92400e; }
-        input, textarea, select { border: none !important; outline: none !important; background: transparent; width: 100%; color: inherit; }
-        .flight-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; align-items: center; }
+        .glass-card { background: #ffffff; border-radius: 16px; border: 1px solid #f3f4f6; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .day-header { position: sticky; top: 0; z-index: 10; background: rgba(249, 250, 251, 0.9); backdrop-filter: blur(10px); padding: 16px 0; font-weight: 700; border-bottom: 1px solid #e5e7eb; margin-bottom: 20px; }
+        
+        /* Category Colors */
+        .cat-meals { background: #fee2e2; color: #991b1b; }
+        .cat-activity { background: #dcfce7; color: #166534; }
+        .cat-freetime { background: #f3e8ff; color: #6b21a8; }
+        .cat-commute { background: #fef9c3; color: #854d0e; }
+        .cat-default { background: #f3f4f6; color: #374151; }
     </style>
 </head>
 <body class="p-6 pb-32">
 
-    <header class="mb-10 pt-4">
-        <h1 class="text-4xl font-bold tracking-tight text-black">Bali Trip</h1>
-        <p class="text-sm font-medium opacity-40 uppercase tracking-[0.3em] mt-1">2026 Itinerary</p>
+    <header class="mb-8">
+        <h1 class="text-4xl font-bold tracking-tight">Bali Trip</h1>
+        <p class="text-xs font-bold opacity-30 uppercase tracking-widest mt-1">Shared Live Planner</p>
     </header>
 
-    <section class="mb-12">
-        <h2 class="text-xs font-bold uppercase tracking-widest mb-4 opacity-40">Flight Details</h2>
-        <div class="glass-card p-5 space-y-4">
-            <div class="flight-row text-[10px] uppercase font-bold opacity-30">
-                <div>Route</div><div>Flight</div><div class="text-right">Time</div>
+    <section class="mb-10">
+        <h2 class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-40">Flight Details</h2>
+        <div class="glass-card p-5 space-y-3 text-sm">
+            <div class="flex justify-between items-center">
+                <span class="font-bold text-blue-600">HKG → DPS (CX785)</span>
+                <span class="font-bold">10:00 AM</span>
             </div>
-            <div class="flight-row text-sm">
-                <div class="font-semibold text-blue-600 uppercase">HKG → DPS</div>
-                <div class="font-medium">CX785</div>
-                <div class="text-right font-bold">10:00 AM</div>
-            </div>
-            <div class="border-t border-gray-50 pt-3"></div>
-            <div class="flight-row text-sm">
-                <div class="font-semibold text-blue-600 uppercase">DPS → HKG</div>
-                <div class="font-medium">CX784</div>
-                <div class="text-right font-bold">04:10 PM</div>
+            <div class="border-t border-gray-50 pt-3 flex justify-between items-center">
+                <span class="font-bold text-blue-600">DPS → HKG (CX784)</span>
+                <span class="font-bold">04:10 PM</span>
             </div>
         </div>
     </section>
 
-    <section id="itinerary-container">
-        <p class="text-center py-20 opacity-20 text-sm">Syncing with database...</p>
-    </section>
+    <div id="itinerary-container">
+        <p class="text-center py-20 opacity-30 text-sm">Loading your adventure...</p>
+    </div>
 
-    <button onclick="addNewSpot()" class="fixed bottom-8 right-8 bg-black text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-50">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    <button onclick="loadData()" class="fixed bottom-8 right-8 bg-black text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-transform active:scale-90">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path></svg>
     </button>
 
     <script>
-        const SUPABASE_URL = 'https://kkocizbnrhoibxtibeut.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtrb2NpemJucmhvaWJ4dGliZXV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NjI2MzcsImV4cCI6MjA5MjMzODYzN30.l4seai3PLLu2ZEezr7a8DkXSaKZqNH63o_ipGjKHoGc';
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyYlNFGx7MhT_2BH7GnJK4ZJGnrH1ir6vjsOg3OfeS23zR9A_olRX0jySoCiUw1lPVVMg/exec';
 
         const tripDays = [
             { date: '2026-04-28', label: 'Tuesday, 28 Apr' },
@@ -68,72 +60,71 @@
             { date: '2026-05-02', label: 'Saturday, 02 May' }
         ];
 
-        async function loadEverything() {
-            const { data: spots, error } = await _supabase.from('spots').select('*').order('time', { ascending: true });
-            if (error) console.error(error);
-            
+        async function loadData() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                // Assumes row 0 is header, so we take slice(1)
+                render(data.slice(1));
+            } catch (err) {
+                document.getElementById('itinerary-container').innerHTML = "Error loading data. Check if the Script is deployed correctly.";
+            }
+        }
+
+        function render(rows) {
             const container = document.getElementById('itinerary-container');
             container.innerHTML = '';
 
             tripDays.forEach(day => {
                 const daySection = document.createElement('div');
-                daySection.className = 'mb-12';
-                daySection.innerHTML = `<div class="day-header"><h3 class="text-xl font-bold text-black">${day.label}</h3></div>`;
+                daySection.className = 'mb-10';
+                daySection.innerHTML = `<div class="day-header text-xl">${day.label}</div>`;
                 
-                const daySpots = spots ? spots.filter(s => s.date === day.date) : [];
-                const spotList = document.createElement('div');
-                spotList.className = 'space-y-4';
+                // Helper to normalize dates for comparison
+                const dayPlans = rows.filter(r => {
+                    const rowDate = r[0].toString().includes('T') ? r[0].split('T')[0] : r[0];
+                    return rowDate.includes(day.date);
+                });
                 
-                if (daySpots.length === 0) {
-                    spotList.innerHTML = `<button onclick="addNewSpotWithDate('${day.date}')" class="w-full py-6 border-2 border-dashed border-gray-200 rounded-2xl text-xs font-bold text-gray-300 hover:border-gray-400 hover:text-gray-400 transition-all">+ Add Plan</button>`;
-                } else {
-                    daySpots.forEach(spot => {
-                        spotList.innerHTML += `
-                            <div class="glass-card p-5 relative shadow-sm">
-                                <div class="flex justify-between items-center mb-2">
-                                    <select onchange="updateSpot(${spot.id}, 'category', this.value)" class="cat-${spot.category} text-[9px] font-bold px-2 py-0.5 rounded uppercase w-auto">
-                                        <option value="meal" ${spot.category === 'meal' ? 'selected' : ''}>Meal</option>
-                                        <option value="activity" ${spot.category === 'activity' ? 'selected' : ''}>Activity</option>
-                                        <option value="hotel" ${spot.category === 'hotel' ? 'selected' : ''}>Hotel</option>
-                                        <option value="commute" ${spot.category === 'commute' ? 'selected' : ''}>Commute</option>
-                                    </select>
-                                    <input onblur="updateSpot(${spot.id}, 'time', this.value)" value="${spot.time}" class="text-right text-xs font-bold text-gray-400 w-20">
-                                </div>
-                                <input onblur="updateSpot(${spot.id}, 'title', this.value)" value="${spot.title}" placeholder="Item name" class="text-base font-semibold text-gray-900 mb-1">
-                                <textarea onblur="updateSpot(${spot.id}, 'note', this.value)" class="text-xs text-gray-400 font-medium placeholder-gray-200 resize-none" placeholder="Notes, booking ref, or links..." rows="2">${spot.note || ''}</textarea>
-                                <button onclick="deleteSpot(${spot.id})" class="absolute top-4 right-2 text-gray-200 hover:text-red-400 p-2">✕</button>
-                            </div>
-                        `;
-                    });
+                if (dayPlans.length === 0) {
+                    daySection.innerHTML += `<p class="text-xs opacity-20 italic ml-2">No plans recorded...</p>`;
                 }
-                daySection.appendChild(spotList);
+
+                dayPlans.forEach(plan => {
+                    const [date, start, end, activity, category, place, note] = plan;
+                    const catClean = (category || 'default').toLowerCase().replace(/\s/g, '');
+                    const catClass = `cat-${catClean}`;
+                    
+                    daySection.innerHTML += `
+                        <div class="glass-card p-5 mb-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="px-2 py-1 rounded text-[9px] font-bold uppercase tracking-wider ${catClass}">
+                                    ${category || 'Activity'}
+                                </span>
+                                <span class="text-xs font-bold text-gray-400">
+                                    ${start}${end ? ` — ${end}` : ''}
+                                </span>
+                            </div>
+                            
+                            <h3 class="text-lg font-semibold text-gray-900 leading-tight">${activity}</h3>
+                            
+                            ${place && place !== 'TBC' && place !== '' ? `
+                                <div class="flex items-center gap-1 mt-2 text-xs font-medium text-blue-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                    ${place}
+                                </div>
+                            ` : ''}
+
+                            ${note ? `<p class="text-xs text-gray-400 mt-3 italic leading-relaxed border-t border-gray-50 pt-3">${note}</p>` : ''}
+                        </div>
+                    `;
+                });
                 container.appendChild(daySection);
             });
         }
 
-        async function updateSpot(id, field, value) {
-            await _supabase.from('spots').update({ [field]: value }).eq('id', id);
-        }
-
-        async function addNewSpot() {
-            const date = prompt("Which date? (2026-04-28 to 2026-05-02)", "2026-04-28");
-            if (date) addNewSpotWithDate(date);
-        }
-
-        async function addNewSpotWithDate(date) {
-            const { error } = await _supabase.from('spots').insert([{ title: 'New Plan', category: 'activity', time: '12:00', date: date }]);
-            if (error) alert("Database error: Check if you have a 'date' column in your Supabase table.");
-            loadEverything();
-        }
-
-        async function deleteSpot(id) {
-            if(confirm('Delete plan?')) {
-                await _supabase.from('spots').delete().eq('id', id);
-                loadEverything();
-            }
-        }
-
-        loadEverything();
+        // Initial Load
+        loadData();
     </script>
 </body>
 </html>
