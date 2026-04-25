@@ -13,12 +13,12 @@
         .glass-card { background: #fff; border-radius: 20px; border: 1px solid #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.02); overflow: hidden; margin-bottom: 16px; }
         .day-header { position: sticky; top: 0; z-index: 50; background: rgba(250, 250, 250, 0.95); backdrop-filter: blur(12px); padding: 20px 0 10px 0; border-bottom: 1px solid #f0f0f0; margin-bottom: 10px; }
 
-        /* COLORS FOR CATEGORIES */
+        /* MATCHING EXCEL COLORS */
         .tag { font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; }
-        .cat-meals { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
-        .cat-activity { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
-        .cat-freetime { background: #f3e8ff; color: #7e22ce; border: 1px solid #e9d5ff; }
-        .cat-commute { background: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
+        .cat-meals { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; } /* Green */
+        .cat-freetime { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; } /* Blue/Purple */
+        .cat-activity { background: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; } /* Orange */
+        .cat-commute { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; } /* Light Gray */
         .cat-default { background: #f4f4f5; color: #52525b; border: 1px solid #e4e4e7; }
     </style>
 </head>
@@ -29,25 +29,25 @@
         <p class="text-[10px] font-bold text-orange-500 uppercase tracking-[0.3em] mt-1">Confirmed Itinerary</p>
     </header>
 
-    <div class="glass-card bg-black text-white p-6 mb-8">
-        <div class="flex justify-between items-center text-[10px] font-bold opacity-50 uppercase mb-4 tracking-widest">
+    <div class="glass-card bg-black text-white p-5 mb-8">
+        <div class="flex justify-between items-center text-[10px] font-bold opacity-50 uppercase mb-4">
             <span>Cathay Pacific</span>
             <span>Direct Flight</span>
         </div>
-        <div class="space-y-8">
+        <div class="space-y-6">
             <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold">HKG <span class="text-[11px] block opacity-50 font-medium italic mt-1 text-blue-400">10:00 AM Depart</span></div>
+                <div class="text-xl font-bold">HKG <span class="text-[10px] block opacity-40 font-medium italic">10:00 AM</span></div>
                 <div class="flex-1 border-t border-dashed border-white/20 mx-4 relative">
-                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 text-lg">✈️</span>
+                    <span class="absolute -top-2 left-1/2 -translate-x-1/2 text-[10px]">✈</span>
                 </div>
-                <div class="text-2xl font-bold text-right">DPS <span class="text-[11px] block opacity-50 font-medium italic mt-1 text-blue-400">03:00 PM Arrive</span></div>
+                <div class="text-xl font-bold text-right">DPS <span class="text-[10px] block opacity-40 font-medium italic">03:00 PM</span></div>
             </div>
-            <div class="flex justify-between items-center pt-6 border-t border-white/10">
-                <div class="text-2xl font-bold text-orange-400">DPS <span class="text-[11px] block opacity-50 font-medium italic mt-1 text-white">04:10 PM Depart</span></div>
+            <div class="flex justify-between items-center pt-4 border-t border-white/10">
+                <div class="text-xl font-bold text-orange-400">DPS <span class="text-[10px] block opacity-40 font-medium italic text-white">04:10 PM</span></div>
                 <div class="flex-1 border-t border-dashed border-white/20 mx-4 relative">
-                    <span class="absolute -top-2.5 left-1/2 -translate-x-1/2 text-lg text-orange-400">✈️</span>
+                    <span class="absolute -top-2 left-1/2 -translate-x-1/2 text-[10px] text-orange-400">✈</span>
                 </div>
-                <div class="text-2xl font-bold text-right text-orange-400">HKG <span class="text-[11px] block opacity-50 font-medium italic mt-1 text-white">09:00 PM Arrive</span></div>
+                <div class="text-xl font-bold text-right text-orange-400">HKG <span class="text-[10px] block opacity-40 font-medium italic text-white">09:00 PM</span></div>
             </div>
         </div>
     </div>
@@ -69,19 +69,16 @@
             { id: '02', label: 'Saturday, 2 May' }
         ];
 
-        // THE ULTIMATE TIME FIX: Ignores Timezones and extracts pure hour/min
-        function formatTimeStrict(val) {
+        // FORCES AM/PM STRINGS TO STAY AS TYPED
+        function formatTimeExcel(val) {
             if (!val) return '';
             let s = val.toString();
             if (s.includes('T')) {
                 let d = new Date(val);
-                // We add the offset back to "neutralize" the browser's timezone shift
-                let userTime = new Date(d.getTime() + d.getTimezoneOffset() * 60000);
-                let hh = userTime.getHours().toString().padStart(2, '0');
-                let mm = userTime.getMinutes().toString().padStart(2, '0');
-                return `${hh}:${mm}`;
+                return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
             }
-            return s.substring(0, 5);
+            // If it's a raw string like "8:30:00 PM", clean it to "8:30 PM"
+            return s.replace(/:\d{2}\s/, ' '); 
         }
 
         async function loadData() {
@@ -101,37 +98,41 @@
                 daySection.innerHTML = `<div class="day-header"><h3 class="text-xs font-800 text-black uppercase tracking-[0.2em]">${day.label}</h3></div>`;
                 
                 const dayPlans = rows.filter(r => {
-                    const rowDateStr = r[0].toString();
-                    return rowDateStr.includes(`-${day.id}`) || rowDateStr.startsWith(day.id) || (day.id == '01' && rowDateStr.includes('-05-01'));
+                    const rowStr = r[0].toString();
+                    return rowStr.includes(`-${day.id}`) || rowStr.startsWith(day.id) || (day.id == '01' && rowStr.includes('-05-01'));
                 });
 
                 const list = document.createElement('div');
                 list.className = 'mt-4';
 
                 dayPlans.forEach(plan => {
-                    const [date, start, end, activity, category, place, note] = plan;
-                    const catClean = (category || 'default').toLowerCase().trim().replace(/\s/g, '');
+                    // Mapped to your screenshot columns: 0=Date, 1=Start, 2=End, 3=Activity, 4=Location, 5=Category, 6=Notes
+                    const [date, start, end, activity, location, category, notes] = plan;
+                    
+                    const catRaw = (category || 'default').trim();
+                    const catClean = catRaw.toLowerCase().replace(/\s/g, '');
+                    const isCommute = catClean === 'commute';
                     
                     list.innerHTML += `
                         <div class="glass-card p-6">
                             <div class="flex justify-between items-center mb-4">
-                                <span class="tag cat-${catClean}">${category || 'Activity'}</span>
+                                <span class="tag cat-${catClean}">${catRaw}</span>
                                 <span class="text-[10px] font-bold text-gray-300">
-                                    ${formatTimeStrict(start)}${end ? ` — ${formatTimeStrict(end)}` : ''}
+                                    ${formatTimeExcel(start)}${end ? ` — ${formatTimeExcel(end)}` : ''}
                                 </span>
                             </div>
 
                             <h4 class="text-xl font-bold text-gray-900 leading-tight mb-2">${activity}</h4>
 
-                            ${catClean !== 'commute' ? (
-                                (!place || place === "" || place.toUpperCase() === "TBC") 
+                            ${!isCommute ? (
+                                (!location || location === "" || location.toLowerCase() === "place") 
                                 ? `<p class="text-[10px] text-red-500 font-bold flex items-center gap-1">⚠️ TBC</p>` 
-                                : `<p class="text-[10px] text-blue-600 font-bold flex items-center gap-1">📍 ${place}</p>`
+                                : `<p class="text-[10px] text-blue-600 font-bold flex items-center gap-1">📍 ${location}</p>`
                             ) : ''}
 
-                            ${note ? `
-                                <div class="mt-4 pt-4 border-t border-gray-50 text-xs text-gray-400 italic leading-relaxed">
-                                    ${note}
+                            ${notes && notes.toLowerCase() !== 'notes' ? `
+                                <div class="mt-4 pt-4 border-t border-gray-50 text-xs text-gray-400 italic">
+                                    ${notes}
                                 </div>
                             ` : ''}
                         </div>
