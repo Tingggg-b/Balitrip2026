@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Bali 2026</title>
     
     <link rel="apple-touch-icon" href="https://media.istockphoto.com/id/1212688337/vector/pool-sunset.jpg?s=612x612&w=0&k=20&c=HCRWgXPkrVDpciWJRFDqLkGBGZklPJMZzr0cOX_3BrA=">
@@ -13,12 +13,33 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --sat: env(safe-area-inset-top);
+        }
 
-        body { padding-top: env(safe-area-inset-top); }
-        .day-header {top: env(safe-area-inset-top); }
-        body { background-color: #f8fafc; color: #1e293b; font-family: 'Inter', sans-serif; letter-spacing: -0.01em; }
+        body { 
+            background-color: #f8fafc; 
+            color: #1e293b; 
+            font-family: 'Inter', sans-serif; 
+            letter-spacing: -0.01em;
+            /* Pushes everything down to clear the notch */
+            padding-top: var(--sat); 
+        }
+
         h1, h3, h4 { font-family: 'Outfit', sans-serif; }
         
+        .day-header { 
+            position: sticky; 
+            /* This ensures the sticky bar stops exactly below the notch */
+            top: var(--sat); 
+            z-index: 50; 
+            background: rgba(248, 250, 252, 0.95); 
+            backdrop-filter: blur(8px); 
+            padding: 10px 0;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
         .glass-card { 
             background: white; 
             border-radius: 16px; 
@@ -27,15 +48,6 @@
             margin-bottom: 10px;
             padding: 12px 14px;
             border-left-width: 5px;
-        }
-
-        .day-header { 
-            position: sticky; top: 0; z-index: 50; 
-            background: rgba(248, 250, 252, 0.95); 
-            backdrop-filter: blur(8px); 
-            padding: 10px 0;
-            margin-bottom: 8px;
-            border-bottom: 1px solid #e2e8f0;
         }
 
         .flight-ticket {
@@ -52,16 +64,12 @@
         
         .cat-meals { border-left-color: #ef4444; background-color: #fef2f2; }
         .tag-meals { background: #fee2e2; color: #ef4444; }
-
         .cat-activity { border-left-color: #16a34a; background-color: #f0fdf4; }
         .tag-activity { background: #dcfce7; color: #16a34a; }
-
         .cat-freetime { border-left-color: #4f46e5; background-color: #f5f3ff; }
         .tag-freetime { background: #e0e7ff; color: #4f46e5; }
-
         .cat-commute { border-left-color: #ca8a04; background-color: #fefce8; }
         .tag-commute { background: #fef9c3; color: #ca8a04; }
-
         .cat-default { border-left-color: #64748b; background-color: #f8fafc; }
         .tag-default { background: #f1f5f9; color: #64748b; }
 
@@ -70,7 +78,7 @@
 </head>
 <body class="p-4 pb-24">
 
-    <header class="mb-4">
+    <header class="mb-4 pt-2">
         <h1 class="text-3xl font-900 tracking-tighter text-slate-900">Bali 2026</h1>
         <p class="text-[10px] font-bold text-indigo-600 uppercase tracking-widest">Itinerary</p>
     </header>
@@ -83,26 +91,26 @@
         <div class="space-y-6">
             <div class="flex justify-between items-center">
                 <div class="text-xl font-black">HKG
-                    <span class="block text-[10px] font-medium opacity-70 italic text-white">10:00 am</span>
+                    <span class="block text-[10px] font-medium opacity-70 italic text-white">10:00</span>
                     <span class="block text-[9px] font-bold text-blue-300 mt-1 uppercase">CX 785</span>
                 </div>
                 <div class="flex-1 border-t-2 border-dashed border-white/20 mx-4 relative">
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-lg">✈️</span>
                 </div>
                 <div class="text-xl font-black text-right">DPS
-                    <span class="block text-[10px] font-medium opacity-70 italic text-white">03:00 pm</span>
+                    <span class="block text-[10px] font-medium opacity-70 italic text-white">15:00</span>
                 </div>
             </div>
             <div class="flex justify-between items-center pt-5 border-t border-white/10">
                 <div class="text-xl font-black text-orange-400">DPS
-                    <span class="block text-[10px] font-medium opacity-70 italic text-white">04:10 pm</span>
+                    <span class="block text-[10px] font-medium opacity-70 italic text-white">16:10</span>
                     <span class="block text-[9px] font-bold text-orange-200 mt-1 uppercase text-right">CX 784</span>
                 </div>
                 <div class="flex-1 border-t-2 border-dashed border-white/20 mx-4 relative">
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-lg text-orange-400">🛫</span>
                 </div>
                 <div class="text-xl font-black text-right text-orange-400">HKG
-                    <span class="block text-[10px] font-medium opacity-70 italic text-white">09:00 pm</span>
+                    <span class="block text-[10px] font-medium opacity-70 italic text-white">21:00</span>
                 </div>
             </div>
         </div>
@@ -119,6 +127,7 @@
 
     <div class="mt-12 mb-8">
         <div class="day-header"><h3 class="text-[11px] font-900 text-slate-400 uppercase tracking-widest">Hotel & Logistics</h3></div>
+        
         <div class="glass-card cat-freetime mb-4">
             <div class="flex justify-between items-center mb-4">
                 <h4 class="text-[18px] font-black text-slate-900">Hyatt Regency Bali</h4>
@@ -128,29 +137,30 @@
                 <div class="flex gap-2">
                     <div class="flex-1 bg-white/50 p-3 rounded-xl text-center border border-indigo-100">
                         <p class="text-[9px] font-800 text-indigo-400 uppercase">Check-in</p>
-                        <p class="text-[14px] font-black text-indigo-900">3:00 PM</p>
+                        <p class="text-[14px] font-black text-indigo-900">15:00</p>
                     </div>
                     <div class="flex-1 bg-white/50 p-3 rounded-xl text-center border border-slate-200">
                         <p class="text-[9px] font-800 text-slate-400 uppercase">Check-out</p>
-                        <p class="text-[14px] font-black text-slate-900">12:00 PM</p>
+                        <p class="text-[14px] font-black text-slate-900">12:00</p>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="glass-card cat-freetime">
             <div class="flex justify-between items-center mb-4">
                 <h4 class="text-[18px] font-black text-slate-900">MAE Villas</h4>
-                <a href="https://goo.gl/maps/ht8VHvJdntzSko6H8" target="_blank" class="loc-tag"> View Map</a>
+                <a href="https://goo.gl/maps/ht8VHvJdntzSko6H8" target="_blank" class="loc-tag">📍 View Map</a>
             </div>
             <div class="space-y-4">
                 <div class="flex gap-2">
                     <div class="flex-1 bg-white/50 p-3 rounded-xl text-center border border-indigo-100">
                         <p class="text-[9px] font-800 text-indigo-400 uppercase">Check-in</p>
-                        <p class="text-[14px] font-black text-indigo-900">3:00 PM</p>
+                        <p class="text-[14px] font-black text-indigo-900">15:00</p>
                     </div>
                     <div class="flex-1 bg-white/50 p-3 rounded-xl text-center border border-slate-200">
                         <p class="text-[9px] font-800 text-slate-400 uppercase">Check-out</p>
-                        <p class="text-[14px] font-black text-slate-900">11:00 AM</p>
+                        <p class="text-[14px] font-black text-slate-900">11:00</p>
                     </div>
                 </div>
                 <a href="https://wa.me/6282340666137" target="_blank" class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white font-bold py-3 rounded-xl shadow-md active:scale-95 transition-all">
@@ -180,7 +190,7 @@
             let s = val.toString();
             if (s.includes('T')) {
                 let d = new Date(val);
-                return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }).toLowerCase();
+                return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
             }
             return s.replace(/:\d{2}\s/, ' ').toLowerCase(); 
         }
@@ -216,7 +226,7 @@
                     
                     const isLocationLink = location && (location.includes('http') || location.includes('goo.gl'));
                     const locDisplay = isLocationLink ? "View Map" : ` ${location}`;
-                    const locLink = isLocationLink ? location : `http://google.com/maps/search/${encodeURIComponent(location)}`;
+                    const locLink = isLocationLink ? location : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 
                     list.innerHTML += `
                         <div class="glass-card cat-${catClean}">
@@ -231,7 +241,7 @@
 
                             <div class="flex flex-wrap items-center gap-2 mt-1">
                                 ${!isCommute && location && location.toLowerCase() !== 'place' ? 
-                                    `<a href="${locLink}" target="_blank" class="loc-tag">${locDisplay}</a>` : ''}
+                                    `<a href="${locLink}" target="_blank" class="loc-tag">📍 ${locDisplay}</a>` : ''}
                                 
                                 ${!isCommute && (!location || location.toLowerCase() === 'place') ? 
                                     `<span class="text-[10px] text-red-500 font-bold italic">⚠️ TBC</span>` : ''}
